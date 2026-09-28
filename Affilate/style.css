@@ -1,0 +1,8 @@
+/* Tailwind (CDN) does all the styling. This file only holds global overrides. */
+
+/* No transitions or animations anywhere on the site */
+*, *::before, *::after {
+  transition: none !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aurevo | Discover deals , unlock possiblities</title>
+<meta name="description" content="Hand-picked product recommendations and deals. We may earn a commission from qualifying purchases.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+
+
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white">
+  <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+    <a href="#" class="text-2xl font-black tracking-tight">Aurevo</a>
+    <input id="search" type="search" placeholder="Search products" aria-label="Search products" class="min-w-0 flex-1 rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+    <button id="openAdmin" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700">Admin</button>
+  </div>
+</header>
+
+<section class="bg-slate-900 text-white">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 py-14 sm:py-20 lg:flex-row lg:justify-between">
+    <div class="max-w-xl text-center lg:text-left">
+      <h1 class="text-4xl font-black leading-tight sm:text-6xl">Get your trends Find your favourite</h1>
+      <p class="mt-4 text-lg text-slate-300">We compare the options and pick the ones worth your money. Open a deal to see today's price at the store.</p>
+      <a href="#products" class="mt-8 inline-block rounded-full bg-amber-400 px-8 py-3 font-extrabold text-slate-900 shadow-lg hover:bg-amber-300">Browse top picks</a>
+    </div>
+    <div id="badge" class="hidden -rotate-6 rounded-3xl bg-rose-600 px-10 py-8 text-center shadow-2xl ring-4 ring-amber-400">
+      <p class="text-sm font-bold">Biggest saving right now</p>
+      <p id="best" class="text-7xl font-black leading-none">0%</p>
+      <p class="text-lg font-extrabold">off list price</p>
+    </div>
+  </div>
+</section>
+
+<main id="products" class="mx-auto max-w-6xl px-4 py-10">
+  <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+    <h2 class="text-2xl font-black">Top picks</h2>
+    <span id="count" class="text-sm text-slate-500"></span>
+  </div>
+  <div id="chips" class="mb-8 flex flex-wrap gap-2"></div>
+  <div id="grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"></div>
+  <p id="empty" class="hidden py-16 text-center text-slate-500">No products match your search.</p>
+</main>
+
+<footer class="bg-slate-900 text-sm text-slate-400">
+  <div class="mx-auto max-w-6xl space-y-3 px-4 py-8 text-center"><
+      <button data-open="terms" class="underline hover:text-white">Terms and conditions</button>
+      <button data-open="terms" class="underline hover:text-white">Affiliate disclosure</button>
+    </p>
+    <p>&copy; <span id="yr"></span> Aurevo . All trademarks belong to their owners.</p>
+  </div>
+</footer>
+
+<!-- Terms and conditions -->
+<div id="terms" role="dialog" aria-modal="true" aria-label="Terms and affiliate disclosure" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/60 p-4">
+  <div class="max-h-[85vh] w-full max-w-2xl overflow-auto rounded-2xl bg-white p-6 sm:p-8">
+    <div class="flex items-start justify-between">
+      <h2 class="text-2xl font-black">Terms and affiliate disclosure</h2>
+      <button data-close aria-label="Close" class="px-2 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="mt-4 space-y-3 text-sm text-slate-600 [&_b]:text-slate-900">
+      <p><b>1. Our recommendations.</b> Picks come from our own research. Commissions may influence which products we feature, but we describe every product honestly.</p>
+      <p><b>2. Prices and availability.</b> Prices, ratings and stock are accurate as of our last update and can change without notice. The price shown at the store's checkout is the one that applies.</p>
+      <p><b>3. Third-party stores.</b> We do not sell products or take payments. Orders, shipping, returns and warranties are handled by the store under its own terms and privacy policy.</p>
+      <p><b>4. No warranty.</b> Content is for general information and provided "as is". We are not liable for losses arising from your use of this site or a linked store.</p>
+      <p><b>5. Privacy.</b> This site does not collect personal data. Product data is kept in your browser's local storage. Stores may set their own cookies after you click through.</p>
+      <p><b>6. Changes.</b> We may update these terms at any time. Continuing to use the site means you accept the current version.</p>
+    </div>
+    <button data-close class="mt-6 rounded-full bg-amber-400 px-6 py-2 font-extrabold text-slate-900 hover:bg-amber-300">Got it</button>
+  </div>
+</div>
+
+<!-- Admin panel -->
+<div id="admin" class="fixed inset-0 z-50 hidden overflow-auto bg-slate-100">
+  <div class="mx-auto max-w-6xl p-4 sm:p-8">
+    <div class="mb-6 flex items-center justify-between">
+      <h2 class="text-2xl font-black">Admin panel</h2>
+      <div class="flex gap-2">
+        <button id="logout" class="hidden rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold">Log out</button>
+        <button data-close class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white">Close</button>
+      </div>
+    </div>
+
+    <form id="login" class="mx-auto max-w-sm space-y-3 rounded-2xl bg-white p-6 shadow">
+      <label class="block text-sm font-semibold">Admin password
+        <input id="pass" type="password" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-amber-400">
+      </label>
+      <p id="loginErr" class="hidden text-sm text-red-600">Wrong password. Try again.</p>
+      <button class="w-full rounded-lg bg-amber-400 py-2 font-extrabold text-slate-900 hover:bg-amber-300">Log in</button>
+    </form>
+
+    <div id="dash" class="hidden grid gap-6 lg:grid-cols-5">
+      <form id="pform" class="space-y-3 self-start rounded-2xl bg-white p-6 shadow lg:col-span-2">
+        <h3 id="ftitle" class="text-lg font-black">Add product</h3>
+        <input type="hidden" name="pid">
+        <div id="fields" class="space-y-3"></div>
+        <label class="block text-sm font-semibold">Short description
+          <textarea name="desc" rows="3" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+        </label>
+        <div class="flex gap-2">
+          <button id="save" class="flex-1 rounded-lg bg-amber-400 py-2 font-extrabold text-slate-900 hover:bg-amber-300">Add product</button>
+          <button id="cancel" type="button" class="hidden rounded-lg bg-slate-200 px-4 py-2 font-semibold">Cancel</button>
+        </div>
+      </form>
+
+      <div class="rounded-2xl bg-white p-6 shadow lg:col-span-3">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-lg font-black">Products (<span id="pcount">0</span>)</h3>
+          <div class="flex gap-2 text-xs font-semibold">
+            <button id="copyJson" class="rounded-full bg-slate-100 px-3 py-1.5">Copy JSON</button>
+            <button id="reset" class="rounded-full bg-red-50 px-3 py-1.5 text-red-600">Reset demo data</button>
+          </div>
+        </div>
+        <ul id="plist" class="divide-y divide-slate-200"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
